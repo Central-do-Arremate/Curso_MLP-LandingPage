@@ -1,1 +1,0 @@
-import{j as n,m as a}from"./index-Byk1dken.js";function s({children:t,className:i="",delay:o=0,y:e=28}){return n.jsx(a.div,{className:i,initial:{opacity:0,y:e},whileInView:{opacity:1,y:0},viewport:{once:!0,amount:.2},transition:{duration:.6,delay:o,ease:"easeOut"},children:t})}export{s as A};

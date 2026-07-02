@@ -83,18 +83,48 @@ export default function Depoimentos() {
       aria-labelledby="depoimentos-heading"
       className="relative overflow-hidden bg-brand-yellow py-16 sm:py-20 md:py-24"
     >
-      <img src={depoimentosBg} alt="" aria-hidden="true" className="pointer-events-none absolute inset-0 h-full w-full object-cover" />
+      <img draggable={false} src={depoimentosBg} alt="" aria-hidden="true" className="pointer-events-none absolute inset-0 h-full w-full object-cover" />
 
       <Container className="relative">
-        <AnimatedSection className="flex items-center justify-between gap-4">
+        <AnimatedSection>
           <h2
             id="depoimentos-heading"
-            className="bg-gradient-to-r from-brand-dark to-[#3f3f3f] bg-clip-text font-sora text-2xl font-semibold uppercase tracking-[0.3em] text-transparent sm:text-4xl md:text-[50px]"
+            className="text-center bg-gradient-to-r from-brand-dark to-[#3f3f3f] bg-clip-text font-sora text-2xl font-semibold uppercase tracking-[0.3em] text-transparent sm:text-4xl md:text-[50px]"
           >
             Depoimentos
           </h2>
+        </AnimatedSection>
 
-          <div className="flex flex-shrink-0 gap-3">
+        <AnimatedSection delay={0.1} className="mt-10 md:mt-14">
+          <ul
+            ref={trackRef}
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
+            onPointerLeave={handlePointerUp}
+            onClickCapture={handleClickCapture}
+            className={`-mx-4 flex select-none gap-6 overflow-x-auto px-[7.5%] pb-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:cursor-grab lg:px-0 lg:active:cursor-grabbing [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] ${
+              isDragging ? 'snap-none scroll-auto' : 'snap-x snap-mandatory scroll-smooth'
+            }`}
+          >
+            {TESTIMONIALS.map((t) => (
+              <li key={t.name} className="w-[85%] flex-shrink-0 snap-center sm:w-[240px] sm:snap-start lg:w-[260px]">
+                {t.kind === 'image' ? (
+                  <div className="aspect-[9/16] overflow-hidden rounded-[20px] shadow-xl">
+                    <img draggable={false} src={t.src} alt={t.alt} loading="lazy" className="h-full w-full object-cover" />
+                  </div>
+                ) : (
+                  <YouTubeFacade
+                    videoId={t.videoId}
+                    title={`Depoimento em vídeo de ${t.name} sobre o curso MLP`}
+                    className="aspect-[9/16] w-full rounded-[20px] shadow-xl"
+                  />
+                )}
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-6 flex justify-center gap-3">
             <button
               type="button"
               onClick={() => scrollByCard('left')}
@@ -112,36 +142,6 @@ export default function Depoimentos() {
               <ArrowIcon direction="right" />
             </button>
           </div>
-        </AnimatedSection>
-
-        <AnimatedSection delay={0.1} className="mt-10 md:mt-14">
-          <ul
-            ref={trackRef}
-            onPointerDown={handlePointerDown}
-            onPointerMove={handlePointerMove}
-            onPointerUp={handlePointerUp}
-            onPointerLeave={handlePointerUp}
-            onClickCapture={handleClickCapture}
-            className={`-mx-4 flex select-none gap-6 overflow-x-auto px-4 pb-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:cursor-grab lg:px-0 lg:active:cursor-grabbing [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] ${
-              isDragging ? 'snap-none scroll-auto' : 'snap-x snap-mandatory scroll-smooth'
-            }`}
-          >
-            {TESTIMONIALS.map((t) => (
-              <li key={t.name} className="w-[220px] flex-shrink-0 snap-start sm:w-[240px] lg:w-[260px]">
-                {t.kind === 'image' ? (
-                  <div className="aspect-[9/16] overflow-hidden rounded-[20px] shadow-xl">
-                    <img src={t.src} alt={t.alt} loading="lazy" className="h-full w-full object-cover" />
-                  </div>
-                ) : (
-                  <YouTubeFacade
-                    videoId={t.videoId}
-                    title={`Depoimento em vídeo de ${t.name} sobre o curso MLP`}
-                    className="aspect-[9/16] w-full rounded-[20px] shadow-xl"
-                  />
-                )}
-              </li>
-            ))}
-          </ul>
         </AnimatedSection>
       </Container>
     </section>

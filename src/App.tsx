@@ -1,6 +1,8 @@
 import { lazy, Suspense } from 'react'
 import Hero from './components/sections/Hero'
 import Footer from './components/Footer'
+import CampaignWall from './components/CampaignWall'
+import { CAMPAIGN_DISABLED } from './config/campaign'
 
 const Metodo = lazy(() => import('./components/sections/Metodo'))
 const Modulos = lazy(() => import('./components/sections/Modulos'))
@@ -15,6 +17,10 @@ function SectionFallback({ bg }: { bg: string }) {
 }
 
 export default function App() {
+  if (CAMPAIGN_DISABLED) {
+    return <CampaignWall />
+  }
+
   return (
     <>
       <a

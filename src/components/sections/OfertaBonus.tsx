@@ -45,7 +45,7 @@ const PAYMENT_METHODS = [
 export default function OfertaBonus() {
   return (
     <section id="oferta" aria-labelledby="oferta-heading" className="relative overflow-hidden bg-black py-16 sm:py-20 md:py-24">
-      <img src={oferbaBgPattern} alt="" aria-hidden="true" className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-40" loading="lazy" />
+      <img draggable={false} src={oferbaBgPattern} alt="" aria-hidden="true" className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-40" loading="lazy" />
 
       <Container className="relative">
         <AnimatedSection className="flex justify-center">
@@ -67,7 +67,7 @@ export default function OfertaBonus() {
                 <ul className="mt-8 flex flex-col gap-5">
                   {BONUS_VALUE_ITEMS.map((item) => (
                     <li key={item} className="flex items-start gap-3">
-                      <img src={iconCheck} alt="" aria-hidden="true" className="mt-0.5 h-7 w-7 flex-shrink-0 sm:h-8 sm:w-8" />
+                      <img draggable={false} src={iconCheck} alt="" aria-hidden="true" className="mt-0.5 h-7 w-7 flex-shrink-0 sm:h-8 sm:w-8" />
                       <span className="font-sora text-base font-semibold text-white sm:text-xl md:text-[27px] md:leading-[32px]">
                         {item}
                       </span>
@@ -80,8 +80,9 @@ export default function OfertaBonus() {
               </div>
             </AnimatedSection>
 
-            <AnimatedSection delay={0.15} className="flex justify-center">
+            <AnimatedSection delay={0.15} className="hidden justify-center sm:flex">
               <img
+                draggable={false}
                 src={mockupEntregaveis}
                 alt="Mockup dos materiais entregáveis do curso: ebook, notebook, tablet e celular com o conteúdo do MLP"
                 loading="lazy"
@@ -100,7 +101,7 @@ export default function OfertaBonus() {
               <ul className="mt-8 flex flex-col gap-5">
                 {OFFER_COURSE_ITEMS.map((item) => (
                   <li key={item} className="flex items-start gap-3">
-                    <img src={iconCheck} alt="" aria-hidden="true" className="mt-0.5 h-7 w-7 flex-shrink-0 sm:h-8 sm:w-8" />
+                    <img draggable={false} src={iconCheck} alt="" aria-hidden="true" className="mt-0.5 h-7 w-7 flex-shrink-0 sm:h-8 sm:w-8" />
                     <span className="font-sora text-base font-semibold text-white sm:text-xl md:text-[27px] md:leading-[32px]">
                       {item}
                     </span>
@@ -111,7 +112,7 @@ export default function OfertaBonus() {
               <ul className="mt-5 flex flex-col gap-5 border-t border-white/20 pt-5">
                 {OFFER_BONUS_INCLUDED.map((item) => (
                   <li key={item} className="flex items-start gap-3">
-                    <img src={iconGift} alt="" aria-hidden="true" className="mt-0.5 h-7 w-7 flex-shrink-0 sm:h-8 sm:w-8" />
+                    <img draggable={false} src={iconGift} alt="" aria-hidden="true" className="mt-0.5 h-7 w-7 flex-shrink-0 sm:h-8 sm:w-8" />
                     <span className="font-sora text-base font-semibold text-white/70 line-through sm:text-xl md:text-[27px] md:leading-[32px]">
                       {item}
                     </span>
@@ -132,22 +133,22 @@ export default function OfertaBonus() {
                 ou R$397,00 à vista
               </p>
 
-              <img src={badgeCompraSegura} alt="Selo de compra 100% segura" loading="lazy" className="mx-auto mt-6 h-auto w-full max-w-[320px]" />
+              <img draggable={false} src={badgeCompraSegura} alt="Selo de compra 100% segura" loading="lazy" className="mx-auto mt-6 h-auto w-full max-w-[320px]" />
             </div>
           </AnimatedSection>
         </div>
 
         <div className="mx-auto mt-12 max-w-2xl md:mt-16">
           <CtaButton href={CHECKOUT_URL}>QUERO APROVEITAR A OFERTA</CtaButton>
-        </div>
 
-        <ul className="mx-auto mt-6 flex max-w-lg flex-wrap items-center justify-center gap-4 opacity-70">
-          {PAYMENT_METHODS.map((p) => (
-            <li key={p.alt}>
-              <img src={p.src} alt={p.alt} loading="lazy" className="h-5 w-auto sm:h-6" />
-            </li>
-          ))}
-        </ul>
+          <ul className="mt-6 flex w-full flex-nowrap items-center justify-center gap-3 opacity-70 sm:gap-4">
+            {PAYMENT_METHODS.map((p) => (
+              <li key={p.alt} className="h-4 w-11 flex-shrink-0 xs:h-5 xs:w-12 sm:h-10 sm:w-28">
+                <img draggable={false} src={p.src} alt={p.alt} loading="lazy" className="h-full w-full object-contain" />
+              </li>
+            ))}
+          </ul>
+        </div>
       </Container>
     </section>
   )

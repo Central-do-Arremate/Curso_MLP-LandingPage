@@ -8,6 +8,7 @@ export default function SobreLeo() {
       <Container className="flex flex-col items-center gap-10 md:flex-row md:gap-16">
         <AnimatedSection className="flex-shrink-0">
           <img
+              draggable={false}
             src={sobreLeoPhoto}
             alt="Leonardo Ribeiro, especialista em leilão automotivo, sorrindo em seu escritório"
             loading="lazy"

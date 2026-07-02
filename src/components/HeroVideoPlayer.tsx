@@ -1,43 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
+import { Maximize, Pause, Play, RotateCcw } from 'lucide-react'
 import { loadYouTubeIframeApi, type YouTubePlayer } from '../lib/youtube'
 
 interface HeroVideoPlayerProps {
   videoId: string
   poster: string
   posterAlt: string
-}
-
-function PlayIcon({ className = 'h-8 w-8' }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={`${className} translate-x-0.5`} aria-hidden="true">
-      <path d="M8 5v14l11-7z" />
-    </svg>
-  )
-}
-
-function PauseIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="h-7 w-7" aria-hidden="true">
-      <path d="M6 5h4v14H6zM14 5h4v14h-4z" />
-    </svg>
-  )
-}
-
-function ReplayIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="h-9 w-9" aria-hidden="true">
-      <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" />
-    </svg>
-  )
-}
-
-function FullscreenIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-5 w-5" aria-hidden="true">
-      <path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
 }
 
 export default function HeroVideoPlayer({ videoId, poster, posterAlt }: HeroVideoPlayerProps) {
@@ -206,6 +175,7 @@ export default function HeroVideoPlayer({ videoId, poster, posterAlt }: HeroVide
         className="relative mt-8 block w-full max-w-4xl overflow-hidden rounded-[24px] border-[3px] border-brand-yellow-light shadow-2xl sm:rounded-[35px] md:mt-10"
       >
         <img
+          draggable={false}
           src={poster}
           alt={posterAlt}
           width={1332}
@@ -213,6 +183,11 @@ export default function HeroVideoPlayer({ videoId, poster, posterAlt }: HeroVide
           {...{ fetchpriority: 'high' }}
           className="h-auto w-full object-cover"
         />
+        <span className="absolute inset-0 flex items-center justify-center bg-black/20 transition-colors hover:bg-black/30">
+          <span className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-brand-yellow bg-black/60 backdrop-blur-sm sm:h-20 sm:w-20">
+            <Play className="h-8 w-8 translate-x-0.5 text-brand-yellow sm:h-10 sm:w-10" fill="currentColor" aria-hidden="true" />
+          </span>
+        </span>
       </motion.button>
     )
   }
@@ -239,7 +214,13 @@ export default function HeroVideoPlayer({ videoId, poster, posterAlt }: HeroVide
             isPlaying ? 'scale-75 opacity-0 group-hover:scale-100 group-hover:opacity-100' : 'scale-100 opacity-100'
           }`}
         >
-          {isEnded ? <ReplayIcon /> : isPlaying ? <PauseIcon /> : <PlayIcon />}
+          {isEnded ? (
+            <RotateCcw className="h-9 w-9 text-brand-yellow" aria-hidden="true" />
+          ) : isPlaying ? (
+            <Pause className="h-7 w-7 text-brand-yellow" fill="currentColor" aria-hidden="true" />
+          ) : (
+            <Play className="h-8 w-8 translate-x-0.5 text-brand-yellow" fill="currentColor" aria-hidden="true" />
+          )}
         </span>
       </button>
 
@@ -252,7 +233,7 @@ export default function HeroVideoPlayer({ videoId, poster, posterAlt }: HeroVide
         aria-label={isFullscreen ? 'Sair da tela cheia' : 'Tela cheia'}
         className="absolute right-4 top-4 z-40 flex h-10 w-10 items-center justify-center rounded-full border border-brand-yellow-light/50 bg-black/40 text-brand-yellow opacity-0 backdrop-blur-md transition-all hover:scale-110 hover:bg-brand-yellow hover:text-brand-dark group-hover:opacity-100"
       >
-        <FullscreenIcon />
+        <Maximize className="h-5 w-5" aria-hidden="true" />
       </button>
 
       <div

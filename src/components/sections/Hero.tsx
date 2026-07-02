@@ -14,14 +14,17 @@ export default function Hero() {
   return (
     <header className="relative overflow-hidden bg-brand-black pb-0 pt-10 sm:pt-14 md:pt-16">
       <img
+          draggable={false}
         src={heroBg}
         alt=""
         {...{ fetchpriority: 'high' }}
         className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-90"
       />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-brand-yellow-dark/25 via-brand-yellow-dark/5 to-transparent sm:h-56" />
 
       <Container className="relative flex flex-col items-center">
         <motion.img
+            draggable={false}
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}

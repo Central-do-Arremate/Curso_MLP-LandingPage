@@ -68,7 +68,7 @@ export default function Faq() {
               className="mt-5 flex items-center justify-center gap-3 rounded-2xl border-2 border-white bg-brand-yellow py-4 font-sora text-lg font-bold text-brand-dark transition-transform hover:scale-[1.02]"
             >
               DÚVIDAS? CLIQUE AQUI!
-              <img src={iconWhatsapp} alt="" aria-hidden="true" className="h-6 w-6" />
+              <img draggable={false} src={iconWhatsapp} alt="" aria-hidden="true" className="h-6 w-6" />
             </a>
           </div>
         </AnimatedSection>

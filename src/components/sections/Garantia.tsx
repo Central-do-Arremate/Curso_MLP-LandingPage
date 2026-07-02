@@ -17,6 +17,7 @@ export default function Garantia() {
         <Container className="flex flex-col items-center gap-10 md:flex-row md:gap-16">
           <AnimatedSection className="flex-shrink-0">
             <img
+              draggable={false}
               src={garantiaBadge}
               alt="Selo de garantia de 60 dias de satisfação"
               loading="lazy"

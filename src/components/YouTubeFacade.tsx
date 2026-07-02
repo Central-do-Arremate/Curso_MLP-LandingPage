@@ -1,17 +1,10 @@
 import { useState } from 'react'
+import { Play } from 'lucide-react'
 
 interface YouTubeFacadeProps {
   videoId: string
   title: string
   className?: string
-}
-
-function PlayIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="h-9 w-9 translate-x-0.5 text-brand-dark" aria-hidden="true">
-      <path d="M8 5v14l11-7z" />
-    </svg>
-  )
 }
 
 export default function YouTubeFacade({ videoId, title, className = '' }: YouTubeFacadeProps) {
@@ -37,6 +30,7 @@ export default function YouTubeFacade({ videoId, title, className = '' }: YouTub
       className={`group relative overflow-hidden bg-brand-black ${className}`}
     >
       <img
+        draggable={false}
         src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
         alt=""
         loading="lazy"
@@ -44,7 +38,7 @@ export default function YouTubeFacade({ videoId, title, className = '' }: YouTub
       />
       <span className="absolute inset-0 flex items-center justify-center bg-black/30 transition-colors group-hover:bg-black/40">
         <span className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-yellow shadow-lg">
-          <PlayIcon />
+          <Play className="h-9 w-9 translate-x-0.5 text-brand-dark" fill="currentColor" aria-hidden="true" />
         </span>
       </span>
     </button>
